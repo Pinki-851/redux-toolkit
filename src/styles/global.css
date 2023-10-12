@@ -10,6 +10,8 @@
   padding: 0;
 }
 
-body {
+body,
+html {
   font-size: 10px;
+  /* font-family: "Inter"; */
 }
