@@ -1,1 +1,7 @@
-if we notice this app dosn't required redux for movie details card we can easly pass data on that
+## Package used
+
+- Nextjs (13.5.4)
+- Redux toolkit
+- React Icon
+- tailwindcss
+- Typescript

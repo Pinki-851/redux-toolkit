@@ -1,25 +1,32 @@
 "use client";
 
 import { MovieCard } from "@/components/features/movie/movie-card";
+import { settings } from "@/components/features/movie/slider";
+import { Spinner } from "@/components/features/movie/spinner";
 import { useAppSelector } from "@/store";
 import { Fragment } from "react";
+import Slider from "react-slick";
 
-export default function MovieDetails() {
-  // const state=useSelector((state)=>{state.})
+export function MovieView() {
   const data: any = useAppSelector((state) => {
     return {
       movieData: state.movieSliceReducer.movieData,
       showData: state.movieSliceReducer.showData,
     };
   });
-  console.log("data", data);
+
+  if (Object?.keys(data?.movieData || data?.showData)?.length === 0) {
+    return (
+      <div className='w-screen h-screen flex justify-center items-center'>
+        <Spinner className='w-[10rem] h-[10rem] fill-fontPrimary' />
+      </div>
+    );
+  }
   return (
-    <div className='p-[1.6rem]'>
-      <h2 className='text-fontSecondary text-center mb-[1rem] text-[1.6rem]'>
-        Movies
-      </h2>
+    <div className='p-[3rem]'>
+      <h2 className='text-fontSecondary  mb-[1rem] text-[2rem]'>Movies</h2>
       {data?.movieData?.Response === "True" ? (
-        <div className='flex justify-start flex-wrap items-center gap-[2.4rem]'>
+        <Slider {...settings}>
           {data?.movieData?.Search?.map((movie: any, index: number) => {
             return (
               <Fragment key={index}>
@@ -27,15 +34,13 @@ export default function MovieDetails() {
               </Fragment>
             );
           })}
-        </div>
+        </Slider>
       ) : (
         <div>Somthing went wrong...</div>
       )}
-      <h2 className='text-fontSecondary text-center mb-[1rem] text-[1.6rem]'>
-        Shows
-      </h2>
+      <h2 className='text-fontSecondary my-[1rem] text-[2rem]'>Shows</h2>
       {data?.showData?.Response === "True" ? (
-        <div className='flex justify-start flex-wrap items-center gap-[2.4rem]'>
+        <Slider {...settings}>
           {data?.showData?.Search?.map((movie: any, index: number) => {
             return (
               <Fragment key={index}>
@@ -43,7 +48,7 @@ export default function MovieDetails() {
               </Fragment>
             );
           })}
-        </div>
+        </Slider>
       ) : (
         <div>Somthing went wrong...</div>
       )}

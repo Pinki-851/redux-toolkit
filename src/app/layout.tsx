@@ -1,14 +1,14 @@
-import { Footer } from "@/components/layout/footer";
-import { Header } from "@/components/layout/header";
 import { ReduxProvider } from "@/store/provider";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Fragment } from "react";
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
 import "../styles/global.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const metadata: Metadata = {
+export const metadata: Metadata = {
   title: "Movie",
   description: "Movie",
 };
@@ -20,13 +20,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={`${inter.className} bg-primarycolor`}>
+      <body className={`${inter.className} no-scrollbar bg-primarycolor`}>
         <ReduxProvider>
           <Fragment>
-            <Header />
-            {children}
+            <main className='w-full  overflow-y-auto'>{children}</main>
           </Fragment>
-          <Footer />
         </ReduxProvider>
       </body>
     </html>

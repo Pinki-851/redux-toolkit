@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 
 interface MovieCardProps {
   data: {
@@ -13,21 +14,25 @@ interface MovieCardProps {
 export function MovieCard(props: MovieCardProps) {
   const { data } = props;
   return (
-    <div className='bg-secondarycolor cursor-pointer  w-[20rem] h-[30rem]'>
-      <div className='h-full w-full flex justify-center'>
-        <Image
-          src={data?.Poster}
-          alt={data?.Title}
-          width={200}
-          height={250}
-        />
-      </div>
-      <div className='text-fontPrimary'>
-        <h4 className='text-[2.2rem] font-normal mb-[1rem] whitespace-normal'>
-          {data?.Title}
-        </h4>
-        <p>{data?.Year}</p>
-      </div>
+    <div className='hover:scale-[1.1] min-h-[30rem] m-[1rem] h-full transition-transform duration-500 bg-secondarycolor cursor-pointer w-[18rem] '>
+      <Link
+        href={{
+          pathname: "/movie-card-details",
+          query: { id: data?.imdbID },
+        }}
+      >
+        <div className='h-[20rem] relative w-full flex justify-center'>
+          <Image
+            src={data?.Poster}
+            alt={data?.Title}
+            fill
+          />
+        </div>
+        <div className='text-fontPrimary p-[1rem] text-[1.4rem]'>
+          <h4 className='  mb-[1rem] break-words'>{data?.Title}</h4>
+          <p className=' text-[1.2rem] mb-[1rem] '>{data?.Year}</p>
+        </div>
+      </Link>
     </div>
   );
 }
