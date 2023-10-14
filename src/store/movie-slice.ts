@@ -1,3 +1,4 @@
+import { API_KEY } from "@/components/constants/varible";
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 interface MVProps {
@@ -12,7 +13,7 @@ export const fetchAsyncMovieData: any = createAsyncThunk(
   async (searchKey: string) => {
     try {
       const res = await fetch(
-        `http://www.omdbapi.com/?i=tt3896198&apikey=d6a0ac71&s=${searchKey}&type=movie`,
+        `http://www.omdbapi.com/?i=tt3896198&apikey=${API_KEY}&s=${searchKey}&type=movie`,
         { method: "GET" }
       );
       const finalRes = await res.json();
@@ -27,7 +28,7 @@ export const fetchAsyncShowData: any = createAsyncThunk(
   async (searchKey: string) => {
     try {
       const res = await fetch(
-        `http://www.omdbapi.com/?i=tt3896198&apikey=d6a0ac71&s=${searchKey}&type=series`,
+        `http://www.omdbapi.com/?i=tt3896198&apikey=${API_KEY}&s=${searchKey}&type=series`,
         { method: "GET" }
       );
       const finalRes = await res.json();
@@ -43,7 +44,7 @@ export const fetchAsyncMovieDetails: any = createAsyncThunk(
   async (id: number | string) => {
     try {
       const res = await fetch(
-        `http://www.omdbapi.com/?apikey=d6a0ac71&i=${id}&Plot=full`,
+        `http://www.omdbapi.com/?apikey=${API_KEY}&i=${id}&Plot=full`,
         { method: "GET" }
       );
       const finalRes = await res.json();
