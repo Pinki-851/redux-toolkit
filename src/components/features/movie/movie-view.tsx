@@ -14,7 +14,6 @@ export function MovieView() {
       showData: state.movieSliceReducer.showData,
     };
   });
-
   if (Object?.keys(data?.movieData || data?.showData)?.length === 0) {
     return (
       <div className='w-screen h-screen flex justify-center items-center'>
@@ -36,9 +35,11 @@ export function MovieView() {
           })}
         </Slider>
       ) : (
-        <div>Somthing went wrong...</div>
+        <div className='text-fontPrimary text-[1.4rem] text-center h-[25vh]'>
+          Somthing went wrong...
+        </div>
       )}
-      <h2 className='text-fontSecondary my-[1rem] text-[2rem]'>Shows</h2>
+      <h2 className='text-fontSecondary my-[1rem] text-[2rem] '>Shows</h2>
       {data?.showData?.Response === "True" ? (
         <Slider {...settings}>
           {data?.showData?.Search?.map((movie: any, index: number) => {
@@ -50,7 +51,9 @@ export function MovieView() {
           })}
         </Slider>
       ) : (
-        <div>Somthing went wrong...</div>
+        <div className='text-fontPrimary text-[1.4rem] text-center h-[25vh]'>
+          Somthing went wrong...
+        </div>
       )}
     </div>
   );

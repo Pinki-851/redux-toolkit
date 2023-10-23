@@ -74,20 +74,33 @@ const movieSlice = createSlice({
     },
   },
 
-  extraReducers: {
-    [fetchAsyncMovieData.pending]: (state) => {
+  extraReducers: (builder) => {
+    // [fetchAsyncMovieData.pending]: (state) => {
+    //   return { ...state, loading: true };
+    // },
+    // [fetchAsyncMovieData.fulfilled]: (state, action) => {
+    //   return { ...state, movieData: action?.payload };
+    // },
+    // [fetchAsyncMovieData.rejected]: () => {},
+    // [fetchAsyncShowData.fulfilled]: (state, action) => {
+    //   return { ...state, loading: false, showData: action?.payload };
+    // },
+    // [fetchAsyncMovieDetails.fulfilled]: (state, action) => {
+    //   return { ...state, showAndMovieDetails: action?.payload };
+    // },
+    builder.addCase(fetchAsyncMovieData.pending, (state) => {
       return { ...state, loading: true };
-    },
-    [fetchAsyncMovieData.fulfilled]: (state, action) => {
-      return { ...state, movieData: action?.payload };
-    },
-    [fetchAsyncMovieData.rejected]: () => {},
-    [fetchAsyncShowData.fulfilled]: (state, action) => {
+    });
+    builder.addCase(fetchAsyncMovieData.fulfilled, (state, action) => {
+      console.log("fullfill", state.movieData, action);
+      return { ...state, movieData: action?.payload, loading: false };
+    });
+    builder.addCase(fetchAsyncShowData.fulfilled, (state, action) => {
       return { ...state, loading: false, showData: action?.payload };
-    },
-    [fetchAsyncMovieDetails.fulfilled]: (state, action) => {
+    });
+    builder.addCase(fetchAsyncMovieDetails.fulfilled, (state, action) => {
       return { ...state, showAndMovieDetails: action?.payload };
-    },
+    });
   },
 });
 

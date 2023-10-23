@@ -1,19 +1,25 @@
 "use client";
 import { fetchAsyncMovieData, fetchAsyncShowData } from "@/store/movie-slice";
 import Link from "next/link";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 import { useDispatch } from "react-redux";
 
 export function Header() {
-  const [serach, setSearch] = useState("");
+  const { push } = useRouter();
+  const searchParams = useSearchParams();
+  const query = searchParams.get("searchval");
+
+  const [serach, setSearch] = useState(query ? query : "");
   const dispatch = useDispatch();
+  const pathname = usePathname();
 
   async function handleSearch() {
     if (serach !== "") {
       await dispatch(fetchAsyncMovieData(serach));
       await dispatch(fetchAsyncShowData(serach));
-      setSearch("");
+      push(`${pathname}?searchval=${serach}`);
     }
   }
   return (
@@ -27,7 +33,7 @@ export function Header() {
       <div className='flex justify-start items-center gap-[1.6rem]'>
         <div className='flex justify-start items-center'>
           <input
-            type='text'
+            type='search'
             placeholder='Search...'
             value={serach}
             onChange={(e) => {

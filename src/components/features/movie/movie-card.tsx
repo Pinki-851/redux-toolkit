@@ -13,6 +13,7 @@ interface MovieCardProps {
 }
 export function MovieCard(props: MovieCardProps) {
   const { data } = props;
+
   return (
     <div className='hover:scale-[1.1] min-h-[30rem] m-[1rem] h-full transition-transform duration-500 bg-secondarycolor cursor-pointer w-[18rem] '>
       <Link
@@ -25,6 +26,8 @@ export function MovieCard(props: MovieCardProps) {
           <Image
             src={data?.Poster}
             alt={data?.Title}
+            // placeholder='blur'
+            // blurDataURL={myBlurDataUrl}
             fill
           />
         </div>
