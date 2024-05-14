@@ -26,6 +26,10 @@ export default function RootLayout({
           src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1426495303323810'
           crossOrigin='anonymous'
         ></script>
+        <meta
+          name='google-adsense-account'
+          content='ca-pub-5503726254989659'
+        ></meta>
       </head>
       <body className={`${inter.className} no-scrollbar bg-primarycolor`}>
         <ReduxProvider>
